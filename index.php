@@ -1,3 +1,11 @@
+ <?php
+ob_start();
+session_start();
+if(empty($_SESSION['username'])){
+    header('location:login.php');
+  } else {
+   
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,14 +82,33 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="StockBarang.html"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
-               <li><a href="pembelian.html"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
-               <li><a href="Penjualan.html"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
-               <li><a href="Keuangan.html"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
-               <li><a href="Pegawai.html"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
-                <li><a href="login.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
-
+                <?php 
+                if ($_SESSION['role'] == '3'){
+                ?>
+                <li class="active"><a href="index.php?page=admin/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=admin/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="Pembelian.php?page=admin/Pembelian"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+               <li><a href="Penjualan.php?page=admin/Penjualan"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+               <li><a href="Keuangan.php?page=admin/Keuangan"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
+               <li><a href="Pegawai.php?page=admin/Pegawai"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
+                <li><a href="?page=admin/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                } else if ($_SESSION['role'] == '2'){
+                ?>
+            <li class="active"><a href="index.php?page=gudang/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=gudang/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="Pembelian.php?page=gudang/Pembelian"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+                  <li><a href="?page=gudang/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+               <?php 
+                } else if($_SESSION['role'] == '1'){
+               ?>
+            <li class="active"><a href="index.php?page=kasir/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=kasir/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+                <li><a href="Penjualan.php?page=kasir/Penjualan"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+                   <li><a href="?page=kasir/login.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                }
+                ?>
             </ul>
             <!--sidebar nav end-->
 
@@ -100,9 +127,7 @@
             <!--toggle button end-->
 
             <!--search start-->
-            <form class="searchform" action="index.html" method="post">
-                <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
-            </form>
+           
             <!--search end-->
 
             <!--notification menu start -->
@@ -280,13 +305,14 @@
                     <li>
                         <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                             <img src="images/photos/user-avatar.png" alt="" />
-                            John Doe
+                            <?php 
+                            echo $_SESSION['username'];
+                            ?>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i>  Settings</a></li>
-                            <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                           
                         </ul>
                     </li>
 
@@ -798,7 +824,17 @@
             2014 &copy; AdminEx by ThemeBucket
         </footer>
         <!--footer section end-->
+<?php
+    ob_flush();
+    if(isset($_GET['aksi'])){
 
+        if($_GET['aksi']=='logout'){
+            session_destroy();
+            header('location:../login.php');
+        }
+    }
+}
+?>
 
     </div>
     <!-- main content end-->
@@ -844,8 +880,7 @@
 <script src="js/scripts.js"></script>
 
 <!--Dashboard Charts-->
-<script src="js/dashboard-chart-init.js"></script>
-
 
 </body>
 </html>
+

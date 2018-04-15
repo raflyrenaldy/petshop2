@@ -1,3 +1,12 @@
+ <?php
+ob_start();
+session_start();
+
+if(empty($_SESSION['username'])){
+    header('location:login.php');
+  } else {
+   
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,14 +70,33 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="StockBarang.html"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
-               <li><a href="pembelian.html"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
-               <li><a href="Penjualan.html"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
-               <li><a href="Keuangan.html"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
-               <li><a href="Pegawai.html"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
-                <li><a href="login.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
-
+                  <?php 
+                if ($_SESSION['role'] == '3'){
+                ?>
+                <li class="active"><a href="index.php?page=admin/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=admin/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="Pembelian.php?page=admin/Pembelian"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+               <li><a href="Penjualan.php?page=admin/Penjualan"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+               <li><a href="Keuangan.php?page=admin/Keuangan"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
+               <li><a href="Pegawai.php?page=admin/Pegawai"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
+                <li><a href="page=admin/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                } else if ($_SESSION['role'] == '2'){
+                ?>
+            <li class="active"><a href="index.php?page=gudang/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=gudang/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="Pembelian.php?page=gudang/Pembelian"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+                  <li><a href="?page=gudang/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+               <?php 
+                } else if($_SESSION['role'] == '1'){
+               ?>
+            <li class="active"><a href="index.php?page=kasir/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=kasir/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+                <li><a href="Penjualan.php?page=kasir/Penjualan"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+                   <li><a href="?page=kasir/login.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                }
+                ?>
             </ul>
             <!--sidebar nav end-->
 
@@ -99,7 +127,9 @@
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <img src="images/photos/user-avatar.png" alt="" />
-                        John Doe
+                       <?php
+echo $_SESSION['username'];
+                       ?>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -362,6 +392,9 @@ Simpan
                 <table class="table table-striped table-hover table-bordered" id="editable-sample">
                 <thead>
                 <tr>
+                    <?php
+                    if($_SESSION['role'] == '3'){
+                    ?>
                     <th>Id Barang</th>
                     <th>Nama Barang</th>
                     <th>Ukuran</th>
@@ -369,9 +402,24 @@ Simpan
                     <th>Stock</th>
                     <th>Harga</th>
                     <th>Aksi</th>
+                    <?php
+                }else{
+                    ?>
+                    <th>Id Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Ukuran</th>
+                    <th>Jenis</th>
+                    <th>Stock</th>
+                    <th>Harga</th>
+                    <?php
+                }
+                ?>
                 </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    if($_SESSION['role'] == '3'){
+                    ?>
                 <tr class="">
                     <td id="idbrg" value="K10001">K10001</td>
                     <td>Power King</td>
@@ -444,6 +492,77 @@ Simpan
                     <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func2()">Edit</button> 
                    <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
                 </tr>
+                <?php
+                }else{
+                    ?>
+                    <tr class="">
+                    <td id="idbrg" value="K10001">K10001</td>
+                    <td>Power King</td>
+                    <td>350 Gr</td>
+                    <td class="center">Kucing</td>
+                    <td>50 Pcs</td>
+                    <td>Rp 50,000</td>                        
+                    
+                </tr>
+                 <tr class="">
+                    <td id="idbrg" value="K10002">K10002</td>
+                    <td>Whiskas</td>
+                    <td>1 Kg</td>
+                    <td class="center">Kucing</td>
+                    <td>1 Pcs</td>
+                    <td>Rp 150,000</td>
+                                     
+                 
+                </tr>
+                 <tr class="">
+                    <td id="idbrg" value="K10003">K10003</td>
+                    <td>Whiskas</td>
+                    <td>500 Gr</td>
+                    <td class="center">Kucing</td>
+                    <td>1 Pcs</td>
+                    <td>Rp 65,000</td>   
+                      
+                   
+                </tr>
+                 <tr class="">
+                    <td id="idbrg" value="K10004">K10004</td>
+                    <td>Whiskas</td>
+                    <td>350 Gr</td>
+                    <td class="center">Kucing</td>
+                    <td>1 Pcs</td>
+                    <td>Rp 45,000</td>                        
+                    
+                </tr>
+                 <tr class="">
+                    <td>K10005</td>
+                    <td>Shampoo</td>
+                    <td>500 Gr</td>
+                    <td class="center">Kucing</td>
+                    <td>1 Pcs</td>
+                    <td>Rp 25,000</td>                        
+                     
+                </tr>
+                 <tr class="">
+                    <td>K10006</td>
+                    <td>Black</td>
+                    <td>200 Gr</td>
+                    <td class="center">Kucing</td>
+                    <td>1 Pcs</td>
+                    <td>Rp 15,000</td>                        
+                   
+                </tr>
+                 <tr class="">
+                    <td>K10007</td>
+                    <td>Shampoo</td>
+                    <td>350 Gr</td>
+                    <td class="center">Anjing</td>
+                    <td>50 Pcs</td>
+                    <td>Rp 40,000</td>                        
+                   
+                </tr>
+                <?php
+            }
+            ?>
                 </tbody>
                 </table>
                 </div>
@@ -640,3 +759,14 @@ function func1() {
 </script>
 </body>
 </html>
+<?php
+    ob_flush();
+    if(isset($_GET['aksi'])){
+
+        if($_GET['aksi']=='logout'){
+            session_destroy();
+            header('location:login.php');
+        }
+    }
+}
+?>

@@ -1,3 +1,13 @@
+ <?php
+ob_start();
+session_start();
+
+
+if(empty($_SESSION['username'])){
+    header('location:login.php');
+  } else {
+   
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +17,7 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>Penjualan</title>
+  <title>Pembelian</title>
 
   <!--data table-->
   <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
@@ -61,13 +71,33 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="StockBarang.html"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
-               <li><a href="pembelian.html"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
-               <li><a href="penjualan.html"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
-               <li><a href="Keuangan.html"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
-               <li><a href="Pegawai.html"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
-                <li><a href="login.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                  <?php 
+                if ($_SESSION['role'] == '3'){
+                ?>
+                <li class="active"><a href="index.php?page=admin/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=admin/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="Pembelian.php?page=admin/Pembelian"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+               <li><a href="Penjualan.php?page=admin/Penjualan"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+               <li><a href="Keuangan.php?page=admin/Keuangan"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
+               <li><a href="Pegawai.php?page=admin/Pegawai"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
+                <li><a href="?page=admin/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                } else if ($_SESSION['role'] == '2'){
+                ?>
+            <li class="active"><a href="index.php?page=gudang/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=gudang/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="Pembelian.php?page=gudang/Pembelian"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+                  <li><a href="?page=gudang/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+               <?php 
+                } else if($_SESSION['role'] == '1'){
+               ?>
+            <li class="active"><a href="index.php?page=kasir/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="StockBarang.php?page=kasir/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+                <li><a href="Penjualan.php?page=kasir/Penjualan"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+                   <li><a href="?page=kasir/login.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                }
+                ?>
 
             </ul>
             <!--sidebar nav end-->
@@ -99,7 +129,10 @@
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <img src="images/photos/user-avatar.png" alt="" />
-                        John Doe
+                       <?php
+echo $_SESSION['username'];
+
+                       ?>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -118,14 +151,14 @@
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                Penjualan
+                Pembelian
             </h3>
             <ul class="breadcrumb">
                 <li>
                     <a href="index.html">Home</a>
                 </li>
             
-                <li class="active"> Penjualan </li>
+                <li class="active"> Pembelian </li>
             </ul>
         </div>
         <!-- page heading end-->
@@ -136,7 +169,7 @@
                 <div class="col-sm-12">
                 <section class="panel">
                 <header class="panel-heading">
-                    penjualan
+                    Pembelian
                     <span class="tools pull-right">
                         <a href="javascript:;" class="fa fa-chevron-down"></a>
                         <a href="javascript:;" class="fa fa-times"></a>
@@ -147,14 +180,14 @@
                 <div class="clearfix">
                     <div class="btn-group">
                         <a href="#myModal-1" data-toggle="modal" class="btn btn-xs btn-success">
-                             Penjualan <i class="fa fa-shopping-cart"></i>
+                             Pembelian <i class="fa fa-shopping-cart"></i>
                         </a>
             <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                        <h4 class="modal-title">Penjualan</h4>
+                                        <h4 class="modal-title">Tambah Data</h4>
                                     </div>
                                     <div class="modal-body">
 
@@ -164,13 +197,13 @@
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Barang</label>
                                                   <select onchange="myFunction3()"  id="mySelect5" class="form-control" style="width: 40%">
                                                         <option>Pilih</option>
-                                                        <option value="Power King,55000,350,Gr,Pcs,Kucing">K10001</option>
-                                                        <option value="Whiskas,160000,1,Kg,Pcs,Kucing">K10002</option>
-                                                        <option value="Whiskas,70000,500,Gr,Pcs,Kucing">K10003</option>
-                                                        <option value="Whiskas,50000,350,Gr,Pcs,Kucing">K10004</option>
-                                                        <option value="Shampoo,30000,500,Gr,Pcs,Kucing">K10005</option>
-                                                        <option value="Black,20000">K10006</option>
-                                                        <option value="Shampoo,50000">K10007</option>
+                                                        <option value="Power King,50000,350,Gr,Pcs,Kucing">K10001</option>
+                                                        <option value="Whiskas,150000,1,Kg,Pcs,Kucing">K10002</option>
+                                                        <option value="Whiskas,65000,500,Gr,Pcs,Kucing">K10003</option>
+                                                        <option value="Whiskas,45000,350,Gr,Pcs,Kucing">K10004</option>
+                                                        <option value="Shampoo,25000,500,Gr,Pcs,Kucing">K10005</option>
+                                                        <option value="Black,15000">K10006</option>
+                                                        <option value="Shampoo,40000">K10007</option>
                                                     </select>
                                                     <input type="text" class="form-control" id="vle"  style="width: 40%" disabled>
                                                   
@@ -392,68 +425,177 @@ Simpan
                 <div class="space15"></div>
                 <table class="table table-striped table-hover table-bordered" id="editable-sample">
                 <thead>
-                <tr>
-                    <th>Id Penjualan</th>
+                   <?php
+                  if($_SESSION['role'] == '3'){ 
+                  ?>
+                <tr>                 
+                    <th>Id Pembelian</th>
                     <th>Kode Barang</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
                     <th>Harga</th>
                     <th>Total</th>
                     <th>Aksi</th>
-                </tr>
+                    </tr>
+                    <?php
+                  }else if($_SESSION['role'] == '2'){
+                    ?>
+                      <tr>     
+                  <th>Id Pembelian</th>
+                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Jumlah</th>
+                    <th>Harga</th>
+                    <th>Total</th>
+                     </tr>
+                    <?php
+                  }
+                    ?>
+                  
+                
                 </thead>
                 <tbody>
+                  <?php
+                  if($_SESSION['role'] == '3'){ 
+                  ?>
                 <tr class="">
-                    <td id="idbrg" value="PJ10001">PJ10001</td>
+                    <td id="idbrg" value="PB10001">PB10001</td>
                     <td>K10001</td>
                     <td>Power King</td>
-                    <td class="center">2</td>
-                    <td>Rp 55,000</td>
-                    <td>Rp 110,000</td>                        
+                    <td class="center">15</td>
+                    <td>Rp 50,000</td>
+                    <td>Rp 750,000</td>                        
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func2()">Edit</button> 
                    <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
                 </tr>
                  <tr class="">
-                    <td id="idbrg" value="PJ10002">PJ10002</td>
+                    <td id="idbrg" value="PB10002">PB10002</td>
                     <td>K10002</td>
                     <td>Whiskas</td>
-                    <td class="center">1</td>
-                    <td>Rp 160,000</td>
-                    <td>Rp 160,000</td>                        
+                    <td class="center">10</td>
+                    <td>Rp 150,000</td>
+                    <td>Rp 1,500,000</td>                        
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func3()">Edit</button> 
                    <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
                 </tr>
                  <tr class="">
-                    <td id="idbrg" value="PJ10003">PJ10003</td>
+                    <td id="idbrg" value="PB10003">PB10003</td>
                     <td>K10003</td>
                     <td>Whiskas</td>
-                    <td class="center">2</td>
-                    <td>Rp 70,000</td>
-                    <td>Rp 140,000</td>                        
+                    <td class="center">10</td>
+                    <td>Rp 65,000</td>
+                    <td>Rp 650,000</td>                        
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func4()">Edit</button> 
                    <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
                 </tr>
                  <tr class="">
-                    <td id="idbrg" value="PJ10004">PJ10004</td>
+                    <td id="idbrg" value="PB10004">PB10004</td>
                     <td>K10004</td>
                     <td>Whiskas</td>
-                    <td class="center">2</td>
-                    <td>Rp 50,000</td>
-                    <td>Rp 100,000</td>                        
+                    <td class="center">10</td>
+                    <td>Rp 45,000</td>
+                    <td>Rp 450,000</td>                        
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func5()">Edit</button> 
                    <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
                 </tr>
                  <tr class="">
-                    <td>PJ10005</td>
+                    <td>PB10005</td>
                     <td>K10005</td>
                     <td>Shampoo</td>
-                    <td class="center">1</td>
-                    <td>Rp 30,000</td>
-                    <td>Rp 30,000</td>                        
+                    <td class="center">4</td>
+                    <td>Rp 25,000</td>
+                    <td>Rp 100,000</td>                        
                      <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func2()">Edit</button> 
                    <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
                 </tr>
-               
+                 <tr class="">
+                    <td>PB10006</td>
+                    <td>K10006</td>
+                    <td>Black</td>
+                    <td class="center">10</td>
+                    <td>Rp 15,000</td>
+                    <td>Rp 150,000</td>                        
+                      <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func2()">Edit</button> 
+                   <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
+                </tr>
+                 <tr class="">
+                    <td>PB10007</td>
+                    <td>K10007</td>
+                    <td>Shampoo</td>
+                    <td class="center">5</td>
+                    <td>Rp 40,000</td>
+                    <td>Rp 200,000</td>                        
+                     <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func2()">Edit</button> 
+                   <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
+                </tr>
+                 <?php
+                  }else if($_SESSION['role'] == '2'){
+                  ?>
+                  <tr class="">
+                    <td id="idbrg" value="PB10001">PB10001</td>
+                    <td>K10001</td>
+                    <td>Power King</td>
+                    <td class="center">15</td>
+                    <td>Rp 50,000</td>
+                    <td>Rp 750,000</td>                        
+                    
+                </tr>
+                 <tr class="">
+                    <td id="idbrg" value="PB10002">PB10002</td>
+                    <td>K10002</td>
+                    <td>Whiskas</td>
+                    <td class="center">10</td>
+                    <td>Rp 150,000</td>
+                    <td>Rp 1,500,000</td>                        
+                     
+                </tr>
+                 <tr class="">
+                    <td id="idbrg" value="PB10003">PB10003</td>
+                    <td>K10003</td>
+                    <td>Whiskas</td>
+                    <td class="center">10</td>
+                    <td>Rp 65,000</td>
+                    <td>Rp 650,000</td>                        
+                  
+                </tr>
+                 <tr class="">
+                    <td id="idbrg" value="PB10004">PB10004</td>
+                    <td>K10004</td>
+                    <td>Whiskas</td>
+                    <td class="center">10</td>
+                    <td>Rp 45,000</td>
+                    <td>Rp 450,000</td>                        
+                    
+                </tr>
+                 <tr class="">
+                    <td>PB10005</td>
+                    <td>K10005</td>
+                    <td>Shampoo</td>
+                    <td class="center">4</td>
+                    <td>Rp 25,000</td>
+                    <td>Rp 100,000</td>                        
+                     
+                </tr>
+                 <tr class="">
+                    <td>PB10006</td>
+                    <td>K10006</td>
+                    <td>Black</td>
+                    <td class="center">10</td>
+                    <td>Rp 15,000</td>
+                    <td>Rp 150,000</td>                        
+                    
+                </tr>
+                 <tr class="">
+                    <td>PB10007</td>
+                    <td>K10007</td>
+                    <td>Shampoo</td>
+                    <td class="center">5</td>
+                    <td>Rp 40,000</td>
+                    <td>Rp 200,000</td>                        
+                    <?php
+                  }
+                    ?>
+                </tr>
                 </tbody>
                 </table>
                 </div>
@@ -612,18 +754,18 @@ function func1() {
 
 <script>
     function func2(){
-        if(document.getElementById("idbrg").value = "PJ10001" ){
+        if(document.getElementById("idbrg").value = "PB10001" ){
 
-         document.getElementById("idbrg2").value="PJ10001";
+         document.getElementById("idbrg2").value="PB10001";
          document.getElementById("MySelect6").value="K10001";
          document.getElementById("namabrg").value="Power King";
          document.getElementById("ukuran").value="350";
          document.getElementById("MySelect1").value = "Gr";
          document.getElementById("MySelect2").value = "Pcs";
          document.getElementById("MySelect3").value = "Kucing";   
-         document.getElementById("hrg2").value="55000";
-          document.getElementById("jml2").value="2";
-          document.getElementById("total2").value="110000";
+         document.getElementById("hrg2").value="50000";
+          document.getElementById("jml2").value="15";
+          document.getElementById("total2").value="750000";
               }
        
     }
@@ -631,18 +773,18 @@ function func1() {
 <script>
     function func3(){
         
-          if(document.getElementById("idbrg").value = "PJ10002" ){
+          if(document.getElementById("idbrg").value = "PB10002" ){
 
-         document.getElementById("idbrg2").value="PJ10002";
+         document.getElementById("idbrg2").value="PB10002";
          document.getElementById("MySelect6").value="K10002";
          document.getElementById("namabrg").value="Whiskas";
          document.getElementById("ukuran").value="1";
          document.getElementById("MySelect1").value = "Kg";
          document.getElementById("MySelect2").value = "Pcs";
          document.getElementById("MySelect3").value = "Kucing";   
-         document.getElementById("hrg2").value="160000";
-          document.getElementById("jml2").value="1";
-          document.getElementById("total2").value="160000";
+         document.getElementById("hrg2").value="150000";
+          document.getElementById("jml2").value="10";
+          document.getElementById("total2").value="1500000";
               }
              
        
@@ -650,36 +792,36 @@ function func1() {
 </script>
 <script>
     function func4(){
-        if(document.getElementById("idbrg").value = "PJ10003" ){
+        if(document.getElementById("idbrg").value = "PB10003" ){
 
-         document.getElementById("idbrg2").value="PJ10003";
+         document.getElementById("idbrg2").value="PB10003";
          document.getElementById("MySelect6").value="K10003";
          document.getElementById("namabrg").value="Whiskas";
          document.getElementById("ukuran").value="500";
          document.getElementById("MySelect1").value = "Gr";
          document.getElementById("MySelect2").value = "Pcs";
          document.getElementById("MySelect3").value = "Kucing";   
-         document.getElementById("hrg2").value="70000";
-          document.getElementById("jml2").value="2";
-          document.getElementById("total2").value="140000";
+         document.getElementById("hrg2").value="65000";
+          document.getElementById("jml2").value="10";
+          document.getElementById("total2").value="650000";
               }
               
     }
 </script>
 <script>
     function func5(){
-         if(document.getElementById("idbrg").value = "PJ10004" ){
+         if(document.getElementById("idbrg").value = "PB10004" ){
 
-         document.getElementById("idbrg2").value="PJ10004";
+         document.getElementById("idbrg2").value="PB10004";
          document.getElementById("MySelect6").value="K10004";
          document.getElementById("namabrg").value="Whiskas";
          document.getElementById("ukuran").value="350";
          document.getElementById("MySelect1").value = "Gr";
          document.getElementById("MySelect2").value = "Pcs";
          document.getElementById("MySelect3").value = "Kucing";   
-         document.getElementById("hrg2").value="50000";
-          document.getElementById("jml2").value="2";
-          document.getElementById("total2").value="100000";
+         document.getElementById("hrg2").value="45000";
+          document.getElementById("jml2").value="10";
+          document.getElementById("total2").value="450000";
               }
              
              
@@ -688,3 +830,14 @@ function func1() {
 </script>
 </body>
 </html>
+<?php
+  ob_flush();
+  if(isset($_GET['aksi'])){
+
+    if($_GET['aksi']=='logout'){
+      session_destroy();
+      header('location:login.php');
+    }
+  }
+}
+?>

@@ -1,3 +1,13 @@
+ <?php
+ob_start();
+session_start();
+
+
+if(empty($_SESSION['username'])){
+    header('location:login.php');
+  } else {
+   
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,14 +71,33 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="StockBarang.html"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
-               <li><a href="pembelian.html"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
-               <li><a href="penjualan.html"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
-               <li><a href="Keuangan.html"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
-               <li><a href="Pewgawai.html"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
-                <li><a href="login.html"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
-
+               <?php 
+                if ($_SESSION['role'] == '3'){
+                ?>
+                <li class="active"><a href="index.php?page=admin/index.php"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="index.php?page=admin/StockBarang.php"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="index.php?page=admin/Pembelian.php"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+               <li><a href="index.php?page=admin/Penjualan.php"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+               <li><a href="index.php?page=admin/Keuangan.php"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
+               <li><a href="index.php?page=admin/Pegawai.php"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
+                <li><a href="login.php?page=admin/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                } else if ($_SESSION['role'] == '2'){
+                ?>
+            <li class="active"><a href="index.php?page=gudang/index.php"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="index.php?page=gudang/StockBarang.php"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+               <li><a href="index.php?page=gudang/Pembelian.php"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
+                  <li><a href="login.php?page=gudang/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+               <?php 
+                } else if($_SESSION['role'] == '1'){
+               ?>
+            <li class="active"><a href="index.php?page=kasir/index.php"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                <li><a href="index.php?page=kasir/StockBarang.php"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
+                <li><a href="index.php?page=kasir/Penjualan.php"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
+                   <li><a href="login.php?page=kasir/login.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <?php 
+                }
+                ?>
             </ul>
             <!--sidebar nav end-->
 
@@ -99,7 +128,9 @@
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <img src="images/photos/user-avatar.png" alt="" />
-                        John Doe
+                        <?php 
+echo $_SESSION['username'];
+                        ?>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -163,7 +194,7 @@
                                                 <div class="form-inline" role="form">
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Nama</label>
                                                   
-                                                    <input type="text" class="form-control" id="vle"  style="width: 80%" >
+                                                    <input type="text" class="form-control" id=""  style="width: 80%" >
                                                   
                                                 </div>
                                             </div>
@@ -171,7 +202,7 @@
                                             <div class="form-group">
                                                 <div class="form-inline" role="form">
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Umur</label>
-                                                      <input type="number" data-trigger="click" data-placement="top" data-toggle="popover" class="form-control popovers"  style="width: 80%" id="ukrn" >
+                                                      <input type="number" data-trigger="click" data-placement="top" data-toggle="popover" class="form-control popovers"  style="width: 80%" id="" >
                                                    
                                                 </div>
                                             </div>
@@ -186,7 +217,7 @@
                                             <div class="form-group">
                                                 <div class="form-inline" role="form">
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Jenis Kelamin</label>
-                                                   <select class="form-control" style="width: 80%" id="jns2" >
+                                                   <select class="form-control" style="width: 80%" id="" >
                                                         <option>Pilih</option>
                                                         <option>Laki - Laki</option>
                                                         <option>Wanita</option>
@@ -197,7 +228,7 @@
                                                 <div class="form-inline" role="form">
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Jabatan</label>
                                                      
-                                                    <select class="form-control" style="width: 80%" id="Jabatan" >
+                                                    <select class="form-control" style="width: 80%" id="" >
                                                         <option>Pilih</option>
                                                         <option>Gudang</option>
                                                         <option>Kasir</option>
@@ -259,20 +290,20 @@
                                         <form class="form-horizontal" role="form">
                                              <div class="form-group">
                                                 <div class="form-inline" role="form">
-                                            <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Id Pegawai</label>
-                                                  <input type="text" class="form-control" id="nama2"  style="width: 80%" id="idbrg2" disabled>                                                  
+                                            <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Pegawai</label>
+                                                  <input type="text" class="form-control" style="width: 80%" id="idbrg2" disabled>                                                  
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-inline" role="form">
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Nama</label>
-                                                    <input type="text" class="form-control" id="nama2"  style="width: 80%" >
+                                                    <input id="nama2" type="text" class="form-control" style="width: 80%" >
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-inline" role="form">
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Umur</label>
-                                                      <input type="number" data-trigger="click" data-placement="top" data-toggle="popover" class="form-control popovers"  style="width: 80%" id="umur2" >
+                                                      <input id="umur2" type="number" data-trigger="click" data-placement="top" data-toggle="popover" class="form-control popovers"  style="width: 80%"  >
                                                    
                                                 </div>
                                             </div>
@@ -287,7 +318,7 @@
                                             <div class="form-group">
                                                 <div class="form-inline" role="form">
                                                 <label for="inputPassword1" class="col-lg-2 col-sm-2 control-label">Jenis Kelamin</label>
-                                                   <select class="form-control" style="width: 80%" id="jenis2" >
+                                                   <select id="jenis2" class="form-control" style="width: 80%">
                                                         <option>Pilih</option>
                                                         <option>Laki - Laki</option>
                                                         <option>Wanita</option>
@@ -564,14 +595,15 @@ function func1() {
 
 <script>
     function func2(){
-      
+       if(document.getElementById("idbrg").value = "PG10001" ){
 
          document.getElementById("idbrg2").value="PG10001";
          document.getElementById("nama2").value="Rafly Renaldy";
          document.getElementById("umur2").value="21";
          document.getElementById("alamat2").value="Jln Golf Raya No.6";
          document.getElementById("jabatan2").value="Kasir";
-              
+         document.getElementById("jenis2").value="Laki - Laki";
+              }
        
     }
 </script>
@@ -584,7 +616,7 @@ function func1() {
          document.getElementById("umur2").value="23";
          document.getElementById("alamat2").value="Jln Cikutra Raya No.5";
          document.getElementById("jabatan2").value="Gudang";
-              
+               document.getElementById("jenis2").value="Laki - Laki";
              
        
     }
@@ -598,7 +630,7 @@ function func1() {
          document.getElementById("umur2").value="25";
          document.getElementById("alamat2").value="Jln Cikutra Raya No.9";
          document.getElementById("jabatan2").value="Kasir";
-              
+               document.getElementById("jenis2").value="Laki - Laki";
               
     }
 </script>
@@ -611,7 +643,7 @@ function func1() {
          document.getElementById("umur2").value="28";
          document.getElementById("alamat2").value="Jln Cicaheum No.6";
          document.getElementById("jabatan2").value="HRD";
-              
+               document.getElementById("jenis2").value="Laki - Laki";
              
              
        
@@ -619,3 +651,14 @@ function func1() {
 </script>
 </body>
 </html>
+<?php
+    ob_flush();
+    if(isset($_GET['aksi'])){
+
+        if($_GET['aksi']=='logout'){
+            session_destroy();
+            header('location:login.php');
+        }
+    }
+}
+?>
