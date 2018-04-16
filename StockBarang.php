@@ -79,14 +79,14 @@ if(empty($_SESSION['username'])){
                <li><a href="Penjualan.php?page=admin/Penjualan"><i class="fa fa-shopping-cart"></i> <span>Penjualan</span></a></li>
                <li><a href="Keuangan.php?page=admin/Keuangan"><i class="fa fa-money"></i> <span>Keuangan</span></a></li>
                <li><a href="Pegawai.php?page=admin/Pegawai"><i class="fa fa-users"></i> <span>Data Pegawai</span></a></li>
-                <li><a href="page=admin/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                <li><a href="?page=admin/login.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
                 <?php 
                 } else if ($_SESSION['role'] == '2'){
                 ?>
             <li class="active"><a href="index.php?page=gudang/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
                 <li><a href="StockBarang.php?page=gudang/StockBarang"><i class="fa fa-briefcase"></i> <span>Stock Barang</span></a></li>
                <li><a href="Pembelian.php?page=gudang/Pembelian"><i class="fa fa-shopping-cart"></i> <span>Pembelian</span></a></li>
-                  <li><a href="?page=gudang/index.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+                  <li><a href="?page=gudang/login.php&aksi=logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
                <?php 
                 } else if($_SESSION['role'] == '1'){
                ?>
@@ -126,7 +126,7 @@ if(empty($_SESSION['username'])){
                
                 <li>
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img src="images/photos/user-avatar.png" alt="" />
+                   
                        <?php
 echo $_SESSION['username'];
                        ?>
@@ -152,7 +152,21 @@ echo $_SESSION['username'];
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                     <?php
+                    if($_SESSION['role'] == '3'){
+                    ?>
+                    <a href="index.php?page=admin/home">Home</a>
+                    <?php
+                }else if($_SESSION['role'] == '2'){
+                    ?>
+                 <a href="index.php?page=gudang/home">Home</a>
+                 <?php
+             }else{
+                 ?>
+                 <a href="index.php?page=kasir/home">Home</a>
+             <?php
+         }
+             ?>
                 </li>
             
                 <li class="active"> Stock Barang </li>
@@ -176,9 +190,25 @@ echo $_SESSION['username'];
                 <div class="adv-table editable-table ">
                 <div class="clearfix">
                     <div class="btn-group">
+                      <?php
+                      if($_SESSION['role'] == '3'){
+                      ?>
                         <a href="#myModal-1" data-toggle="modal" class="btn btn-xs btn-success">
                              Tambah Data <i class="fa fa-plus"></i>
                         </a>
+                        <?php
+                      }else if($_SESSION['role'] == '2'){
+                        ?>
+                        <a href="#myModal-1" data-toggle="modal" class="btn btn-xs btn-success">
+                             Tambah Data <i class="fa fa-plus"></i>
+                        </a>
+                        <?php
+                      }else{
+                        }
+                        ?>
+
+
+
             <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">

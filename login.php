@@ -26,8 +26,8 @@
 
     <form class="form-signin" action="models/process.php" method="post">
         <div class="form-signin-heading text-center">
-            <h1 class="sign-title">Sign In</h1>
-            <img src="images/login-logo.png" alt=""/>
+            
+            <img src="images/loginPetshop2.png" alt=""/>
           
         </div>
         <div class="login-wrap">
@@ -38,12 +38,7 @@
                 <i class="fa fa-check"></i>
             </button>
 
-            <div class="registration">
-                Not a member yet?
-                <a class="" href="registration.html">
-                    Signup
-                </a>
-            </div>
+            
             <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right">
