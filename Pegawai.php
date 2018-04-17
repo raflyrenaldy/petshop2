@@ -131,12 +131,9 @@ if(empty($_SESSION['username'])){
                         <?php 
 echo $_SESSION['username'];
                         ?>
-                        <span class="caret"></span>
+                       
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                        <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                      
-                    </ul>
+                    
                 </li>
 
             </ul>
@@ -285,8 +282,8 @@ echo $_SESSION['username'];
   </div>
 </div>
       <div class="modal-footer">
-         <button onclick="myFunction2()"  type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button onclick="myFunction()" id="myBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button onclick="funcBataltambah()"  type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button onclick="myFunction()" id="myBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
     
       </div>
     </div>
@@ -387,8 +384,155 @@ echo $_SESSION['username'];
   </div>
 </div>
       <div class="modal-footer">
-        <button onclick="myFunction1()" id="myBtn3" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button onclick="myFunction()" id="myBtn2" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button onclick="funcBatalEdit()" id="myBtn3" type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button onclick="myFunction()" id="myBtn2" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal-5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #d9534f;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+       
+      </div>
+
+      <div id="myP3" class="modal-body">
+       Data Akan Dihapus?
+      </div>
+      
+      <div class="modal-footer">
+        <button onclick="funcBatal()" id="myBtn3" type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button onclick="funcHapus()" id="myBtn2" type="button" class="btn btn-secondary" data-dismiss="modal">Hapus</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal-6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #5bc0de;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+       
+      </div>
+
+      <div id="myP3" class="modal-body">
+      Data Tidak Di Hapus
+      </div>
+      
+      <div class="modal-footer">
+        <button onclick="myFunction()" id="myBtn2" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal-7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #d9534f;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+       
+      </div>
+
+      <div id="myP3" class="modal-body">
+       Data Terhapus
+      </div>
+      
+      <div class="modal-footer">
+        <button onclick="myFunction()" id="myBtn2" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal-8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #f0ad4e;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+       
+      </div>
+
+      <div id="myP3" class="modal-body">
+ Batal Tambah Data
+      </div>
+      
+      <div class="modal-footer">
+        <button onclick="myFunction()" id="myBtn2" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal-9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #f0ad4e;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+       
+      </div>
+
+      <div id="myP3" class="modal-body">
+ Batal Edit Data
+      </div>
+      
+      <div class="modal-footer">
+        <button onclick="myFunction()" id="myBtn2" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
     
       </div>
     </div>
@@ -417,7 +561,7 @@ echo $_SESSION['username'];
                     <td>Jln Golf Raya no.6</td>
                     <td>Kasir</td>                       
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func2()">Edit</button> 
-                   <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
+                   <button class="btn btn-danger" type="button" onclick="func1()">Hapus</button></td>
                 </tr>
                  <tr class="">
                     <td id="idbrg" value="PG10002">PG10002</td>
@@ -427,7 +571,7 @@ echo $_SESSION['username'];
                     <td>Jln Cikutra Raya no.5</td>
                     <td>Gudang</td>                       
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func3()">Edit</button> 
-                   <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
+                   <button class="btn btn-danger" type="button" onclick="func1()">Hapus</button></td>
                 </tr>
                  <tr class="">
                     <td id="idbrg" value="PG10003">PG10003</td>
@@ -437,7 +581,7 @@ echo $_SESSION['username'];
                     <td>Jln Cikutra Raya no.9</td>
                     <td>Kasir</td>                        
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func4()">Edit</button> 
-                   <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
+                   <button class="btn btn-danger" type="button" onclick="func1()">Hapus</button></td>
                 </tr>
                  <tr class="">
                     <td id="idbrg" value="PG10004">PG10004</td>
@@ -447,7 +591,7 @@ echo $_SESSION['username'];
                     <td>Jln Cicaheum no.6</td>
                     <td>HRD</td>                        
                       <td align="center"><button class="btn btn-warning" href="#myModal-2" data-toggle="modal" type="button"  onclick="func5()">Edit</button> 
-                   <button class="btn btn-danger" type="button" onclick="func1()">Delete</button></td>
+                   <button class="btn btn-danger" type="button" onclick="func1()">Hapus</button></td>
                 </tr>
                 
                
@@ -596,14 +740,44 @@ function myFunction5(){
 }
 </script>
 <script>
+
+function funcHapus(){
+$('#myModal-5').modal('hide');
+ $('#myModal-7').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
+}
+function funcBatal(){
+  $('#myModal-5').modal('hide');
+ $('#myModal-6').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
+}
 function func1() {
-      var txt;
-    var r = confirm("Data Akan Dihapus?");
-    if (r == true) {
-        alert("Data Telah Terhapus!");
-    } else {
-        alert("Data Tidak Terhapus!");
-    }
+    
+ $('#myModal-5').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
+}
+function funcBataltambah(){
+   $('#myModal-8').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
+}
+function funcBatalEdit(){
+   $('#myModal-9').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 }
 </script>
 

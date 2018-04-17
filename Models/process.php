@@ -11,7 +11,7 @@ $_SESSION['username'] = $username;
 
 if ($_SESSION['username'] == "raflyrenaldy"){
 	session_start();
-	$_SESSION['username'] = 'Rafly Renaldy';
+	$_SESSION['username'] = 'Super Admin';
     $_SESSION['role'] = '3';
     header('location:../index.php?page=admin/home');
 }else if($_SESSION['username'] == "bagusaditya"){

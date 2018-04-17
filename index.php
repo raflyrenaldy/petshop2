@@ -142,12 +142,9 @@ if(empty($_SESSION['username'])){
                             <?php 
                             echo $_SESSION['username'];
                             ?>
-                            <span class="caret"></span>
+                            
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                            <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                           
-                        </ul>
+                        
                     </li>
 
                 </ul>
