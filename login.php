@@ -31,21 +31,15 @@
           
         </div>
         <div class="login-wrap">
-            <input type="text" class="form-control" placeholder="User ID" id="user" name="username" autofocus required="true">
-            <input type="password" class="form-control" placeholder="Password" id="pass" name="password" required="true">
+            <input type="text" class="form-control" placeholder="Nama" id="user" name="username" autofocus required="true">
+            <input type="password" class="form-control" placeholder="Kata Sandi" id="pass" name="password" required="true">
 
             <button class="btn btn-lg btn-login btn-block" type="submit" value="Login">
                 <i class="fa fa-check"></i>
             </button>
 
             
-            <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-                <span class="pull-right">
-                    <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
-
-                </span>
-            </label>
+         
 
         </div>
 
